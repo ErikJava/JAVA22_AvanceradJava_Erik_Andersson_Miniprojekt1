@@ -1,5 +1,4 @@
 # AvanceradJava_Miniprojekt1_V3
-Final version??
 
 I klassen ”Clock” finns en variabel current_state som håller reda på det nuvarande tillståndet.
 Dessa tillstånd inkluderar att hämta tiden, hämta datum, ändra tiden och ändra på datumet.
