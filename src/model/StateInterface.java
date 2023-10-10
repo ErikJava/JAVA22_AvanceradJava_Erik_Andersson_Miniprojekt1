@@ -1,6 +1,6 @@
 package model;
 
-public interface stateInterface {
+public interface StateInterface {
     void changeState();
 
     void readyToSet();

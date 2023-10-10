@@ -1,6 +1,6 @@
 package model;
 
-public interface modelInterface {
+public interface ModelInterface {
     void getTime();
 
     void getDate();

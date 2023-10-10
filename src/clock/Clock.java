@@ -1,12 +1,12 @@
 package clock;
 
-import model.modelInterface;
-import model.stateInterface;
+import model.ModelInterface;
+import model.StateInterface;
 
 import java.util.Scanner;
 
-public class Clock implements modelInterface, stateInterface {
-    private STATE current_state = STATE.GET_TIME;
+public class Clock implements ModelInterface, StateInterface {
+    private STATE currentState = STATE.GET_TIME;
 
 
     public enum STATE {
@@ -18,13 +18,13 @@ public class Clock implements modelInterface, stateInterface {
 
     @Override
     public void getTime() {
-        if (current_state == STATE.GET_TIME) {
+        if (currentState == STATE.GET_TIME) {
             System.out.println("Current time: ");
             time.Time time = new time.Time();
             time.getTime();
-        } else if (current_state == STATE.GET_DATE) {
+        } else if (currentState == STATE.GET_DATE) {
             changeState();
-        } else if (current_state == STATE.CHANGE_TIME) {
+        } else if (currentState == STATE.CHANGE_TIME) {
             set();
         } else {
             System.out.println("Wrong state!");
@@ -33,13 +33,13 @@ public class Clock implements modelInterface, stateInterface {
 
     @Override
     public void getDate() {
-        if (current_state == STATE.GET_DATE) {
+        if (currentState == STATE.GET_DATE) {
             System.out.println("Current date: ");
             date.Date date = new date.Date();
             date.getDate();
-        } else if (current_state == STATE.GET_TIME) {
+        } else if (currentState == STATE.GET_TIME) {
             changeState();
-        } else if (current_state == STATE.CHANGE_DATE) {
+        } else if (currentState == STATE.CHANGE_DATE) {
             set();
         } else {
             System.out.println("Wrong State!");
@@ -48,10 +48,10 @@ public class Clock implements modelInterface, stateInterface {
 
     @Override
     public void changeTime() {
-        if (current_state == STATE.CHANGE_TIME) {
+        if (currentState == STATE.CHANGE_TIME) {
             time.Time time = new time.Time();
             time.changeTime();
-        } else if (current_state == STATE.GET_TIME) {
+        } else if (currentState == STATE.GET_TIME) {
             readyToSet();
         } else {
             System.out.println("Wrong state!");
@@ -60,10 +60,10 @@ public class Clock implements modelInterface, stateInterface {
 
     @Override
     public void changeDate() {
-        if (current_state == STATE.CHANGE_DATE) {
+        if (currentState == STATE.CHANGE_DATE) {
             date.Date date = new date.Date();
             date.changeDate();
-        } else if (current_state == STATE.GET_DATE) {
+        } else if (currentState == STATE.GET_DATE) {
             readyToSet();
         } else {
             System.out.println("Wrong state!");
@@ -73,9 +73,9 @@ public class Clock implements modelInterface, stateInterface {
     @Override
     public void changeState() {
         if (getCurrentState() == STATE.GET_TIME) {
-            current_state = STATE.GET_DATE;
+            currentState = STATE.GET_DATE;
         } else if (getCurrentState() == STATE.GET_DATE) {
-            current_state = STATE.GET_TIME;
+            currentState = STATE.GET_TIME;
         }
 
     }
@@ -83,18 +83,18 @@ public class Clock implements modelInterface, stateInterface {
     @Override
     public void readyToSet() {
         if (getCurrentState() == STATE.GET_TIME) {
-            current_state = STATE.CHANGE_TIME;
+            currentState = STATE.CHANGE_TIME;
         } else if (getCurrentState() == STATE.GET_DATE) {
-            current_state = STATE.CHANGE_DATE;
+            currentState = STATE.CHANGE_DATE;
         }
     }
 
     @Override
     public void set() {
         if (getCurrentState() == STATE.CHANGE_TIME) {
-            current_state = STATE.GET_TIME;
+            currentState = STATE.GET_TIME;
         } else if (getCurrentState() == STATE.CHANGE_DATE) {
-            current_state = STATE.GET_DATE;
+            currentState = STATE.GET_DATE;
         } else {
             System.out.println("Wrong state!");
         }
@@ -102,7 +102,7 @@ public class Clock implements modelInterface, stateInterface {
     }
 
     public STATE getCurrentState() {
-        return current_state;
+        return currentState;
     }
 
     public void mainLoop() {
